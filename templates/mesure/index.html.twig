@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesureController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<form method="post" action="{{ path('app_devis') }}">
+<div class="example-wrapper">
+    <select name="type_de_haie">
+        <option value="" selected>--Choisir votre type de haie--</option>    
+        {% for item in mesHaies %}
+            <option value="{{ item.code }}">{{ item.nom }} - {{ item.prix }} € - {{ item.code }}</option>
+        {% endfor %}
+    </select>
+    </br><input type="text" name="longueur" placeholder="longueur">
+    </br><input type="text" name="hauteur" placeholder="hauteur">
+    <button type="submit">Suite</button>
+</div>
+</form>
+{% endblock %}
