@@ -360,25 +360,11 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
-    <service id="App\Controller\AccueilController" class="App\Controller\AccueilController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\ClientController" class="App\Controller\ClientController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\AccueilController"/>
-      </call>
-    </service>
-    <service id="App\Controller\ChoixController" class="App\Controller\ChoixController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\ChoixController"/>
-      </call>
-    </service>
-    <service id="App\Controller\CreerHaieController" class="App\Controller\CreerHaieController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\CreerHaieController"/>
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\ClientController"/>
       </call>
     </service>
     <service id="App\Controller\DevisController" class="App\Controller\DevisController" public="true" autowire="true" autoconfigure="true">
@@ -388,34 +374,34 @@
         <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\DevisController"/>
       </call>
     </service>
-    <service id="App\Controller\HaieController" class="App\Controller\HaieController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\HaieController"/>
-      </call>
-    </service>
-    <service id="App\Controller\MesureController" class="App\Controller\MesureController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\MesureController"/>
-      </call>
-    </service>
-    <service id="App\Controller\VoirHaieController" class="App\Controller\VoirHaieController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\VoirHaieController"/>
-      </call>
-    </service>
     <service id="App\Entity\Categorie" class="App\Entity\Categorie" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Entity\Client" class="App\Entity\Client" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Entity\Devis" class="App\Entity\Devis" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
     </service>
     <service id="App\Entity\Haie" class="App\Entity\Haie" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Entity\Tailler" class="App\Entity\Tailler" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
+    </service>
+    <service id="App\Form\ClientType" class="App\Form\ClientType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
+    </service>
+    <service id="App\Form\DevisType" class="App\Form\DevisType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
     </service>
     <service id="App\Form\HaieType" class="App\Form\HaieType" autowire="true" autoconfigure="true">
       <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
@@ -424,7 +410,19 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\ClientRepository" class="App\Repository\ClientRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\DevisRepository" class="App\Repository\DevisRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\HaieRepository" class="App\Repository\HaieRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\TaillerRepository" class="App\Repository\TaillerRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -456,7 +454,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.E1KAn24"/>
+      <argument type="service" id=".service_locator.c47wiQB"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1412,6 +1410,9 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\CategorieType</argument>
+        <argument>App\Form\ClientType</argument>
+        <argument>App\Form\DevisType</argument>
         <argument>App\Form\HaieType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -3483,7 +3484,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.E1KAn24"/>
+      <argument type="service" id=".service_locator.c47wiQB"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -4075,7 +4076,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.BVm0jQp"/>
+      <argument type="service" id=".service_locator.bychxok"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4173,6 +4174,9 @@
       <argument type="service" id="form.server_params"/>
       <argument>%form.type_extension.csrf.field_attr%</argument>
       <argument type="collection">
+        <argument key="App\Form\CategorieType">submit</argument>
+        <argument key="App\Form\ClientType">submit</argument>
+        <argument key="App\Form\DevisType">submit</argument>
         <argument key="App\Form\HaieType">submit</argument>
       </argument>
     </service>
@@ -5395,7 +5399,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.D0vW.8c"/>
+      <argument type="service" id=".service_locator.67NrZsg"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -7496,44 +7500,42 @@
       <argument type="service" id="maker.file_manager"/>
       <argument type="service" id="maker.generator"/>
     </service>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AccueilController" class="App\Controller\AccueilController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AccueilController" class="App\Controller\AccueilController" autowire="true" abstract="true"/>
-    <service id=".instanceof.App\Controller\AccueilController.0.App\Controller\AccueilController" class="App\Controller\AccueilController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\AccueilController" class="App\Controller\AccueilController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ChoixController" class="App\Controller\ChoixController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ChoixController" class="App\Controller\ChoixController" autowire="true" abstract="true"/>
-    <service id=".instanceof.App\Controller\ChoixController.0.App\Controller\ChoixController" class="App\Controller\ChoixController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\ChoixController" class="App\Controller\ChoixController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CreerHaieController" class="App\Controller\CreerHaieController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CreerHaieController" class="App\Controller\CreerHaieController" autowire="true" abstract="true"/>
-    <service id=".instanceof.App\Controller\CreerHaieController.0.App\Controller\CreerHaieController" class="App\Controller\CreerHaieController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\CreerHaieController" class="App\Controller\CreerHaieController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ClientController" class="App\Controller\ClientController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ClientController" class="App\Controller\ClientController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\ClientController.0.App\Controller\ClientController" class="App\Controller\ClientController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ClientController" class="App\Controller\ClientController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DevisController" class="App\Controller\DevisController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DevisController" class="App\Controller\DevisController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\DevisController.0.App\Controller\DevisController" class="App\Controller\DevisController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\DevisController" class="App\Controller\DevisController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HaieController" class="App\Controller\HaieController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HaieController" class="App\Controller\HaieController" autowire="true" abstract="true"/>
-    <service id=".instanceof.App\Controller\HaieController.0.App\Controller\HaieController" class="App\Controller\HaieController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\HaieController" class="App\Controller\HaieController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MesureController" class="App\Controller\MesureController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MesureController" class="App\Controller\MesureController" autowire="true" abstract="true"/>
-    <service id=".instanceof.App\Controller\MesureController.0.App\Controller\MesureController" class="App\Controller\MesureController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\MesureController" class="App\Controller\MesureController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\VoirHaieController" class="App\Controller\VoirHaieController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\VoirHaieController" class="App\Controller\VoirHaieController" autowire="true" abstract="true"/>
-    <service id=".instanceof.App\Controller\VoirHaieController.0.App\Controller\VoirHaieController" class="App\Controller\VoirHaieController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\VoirHaieController" class="App\Controller\VoirHaieController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\Categorie.0.App\Entity\Categorie" class="App\Entity\Categorie" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\Categorie" class="App\Entity\Categorie" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Entity\Client.0.App\Entity\Client" class="App\Entity\Client" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Entity\Client" class="App\Entity\Client" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Entity\Devis.0.App\Entity\Devis" class="App\Entity\Devis" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Entity\Devis" class="App\Entity\Devis" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\Haie.0.App\Entity\Haie" class="App\Entity\Haie" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\Haie" class="App\Entity\Haie" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Entity\Tailler.0.App\Entity\Tailler" class="App\Entity\Tailler" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Entity\Tailler" class="App\Entity\Tailler" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ClientType" class="App\Form\ClientType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ClientType" class="App\Form\ClientType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\DevisType" class="App\Form\DevisType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\DevisType" class="App\Form\DevisType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\HaieType" class="App\Form\HaieType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\HaieType" class="App\Form\HaieType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CategorieRepository" class="App\Repository\CategorieRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\CategorieRepository" class="App\Repository\CategorieRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ClientRepository" class="App\Repository\ClientRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ClientRepository" class="App\Repository\ClientRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\DevisRepository" class="App\Repository\DevisRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\DevisRepository" class="App\Repository\DevisRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\HaieRepository" class="App\Repository\HaieRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\HaieRepository" class="App\Repository\HaieRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TaillerRepository" class="App\Repository\TaillerRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\TaillerRepository" class="App\Repository\TaillerRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.pRu6x_4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8052,91 +8054,139 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.zHyJIs5" method="withContext"/>
     </service>
+    <service id=".service_locator.zroWs1n" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="clientRepository" type="service_closure" id="App\Repository\ClientRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.zroWs1n.App\Controller\ClientController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ClientController::index()"/>
+      <argument>App\Controller\ClientController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zroWs1n" method="withContext"/>
+    </service>
     <service id=".service_locator.egipcEH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.egipcEH.App\Controller\CreerHaieController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CreerHaieController::index()"/>
-      <argument>App\Controller\CreerHaieController::index()</argument>
+    <service id=".service_locator.egipcEH.App\Controller\ClientController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ClientController::new()"/>
+      <argument>App\Controller\ClientController::new()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.egipcEH" method="withContext"/>
     </service>
-    <service id=".service_locator.tYRiWvh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.0jUX5FG" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="haieRepository" type="service_closure" id="App\Repository\HaieRepository"/>
+        <argument key="client" type="service_closure" id=".errored..service_locator.0jUX5FG.App\Entity\Client"/>
       </argument>
     </service>
-    <service id=".service_locator.tYRiWvh.App\Controller\DevisController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.0jUX5FG.App\Controller\ClientController::show()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ClientController::show()"/>
+      <argument>App\Controller\ClientController::show()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.0jUX5FG" method="withContext"/>
+    </service>
+    <service id=".service_locator.6agy0ro" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="client" type="service_closure" id=".errored..service_locator.6agy0ro.App\Entity\Client"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.6agy0ro.App\Controller\ClientController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ClientController::edit()"/>
+      <argument>App\Controller\ClientController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.6agy0ro" method="withContext"/>
+    </service>
+    <service id=".service_locator.6agy0ro.App\Controller\ClientController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ClientController::delete()"/>
+      <argument>App\Controller\ClientController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.6agy0ro" method="withContext"/>
+    </service>
+    <service id=".service_locator.s8rI1sG" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="devisRepository" type="service_closure" id="App\Repository\DevisRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.s8rI1sG.App\Controller\DevisController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\DevisController::index()"/>
       <argument>App\Controller\DevisController::index()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.tYRiWvh" method="withContext"/>
+      <factory service=".service_locator.s8rI1sG" method="withContext"/>
     </service>
-    <service id=".service_locator.egipcEH.App\Controller\HaieController::haie_creer()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\HaieController::haie_creer()"/>
-      <argument>App\Controller\HaieController::haie_creer()</argument>
+    <service id=".service_locator.egipcEH.App\Controller\DevisController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DevisController::new()"/>
+      <argument>App\Controller\DevisController::new()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.egipcEH" method="withContext"/>
     </service>
-    <service id=".service_locator.egipcEH.App\Controller\HaieController::haie_voir()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\HaieController::haie_voir()"/>
-      <argument>App\Controller\HaieController::haie_voir()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.egipcEH" method="withContext"/>
+    <service id=".service_locator.XyKmQoN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="devi" type="service_closure" id=".errored..service_locator.XyKmQoN.App\Entity\Devis"/>
+      </argument>
     </service>
-    <service id=".service_locator.egipcEH.App\Controller\HaieController::modifier_haie()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\HaieController::modifier_haie()"/>
-      <argument>App\Controller\HaieController::modifier_haie()</argument>
+    <service id=".service_locator.XyKmQoN.App\Controller\DevisController::show()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DevisController::show()"/>
+      <argument>App\Controller\DevisController::show()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.egipcEH" method="withContext"/>
+      <factory service=".service_locator.XyKmQoN" method="withContext"/>
     </service>
-    <service id=".service_locator.egipcEH.App\Controller\HaieController::supprimer_haie()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\HaieController::supprimer_haie()"/>
-      <argument>App\Controller\HaieController::supprimer_haie()</argument>
+    <service id=".service_locator.NI3GIqK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="devi" type="service_closure" id=".errored..service_locator.NI3GIqK.App\Entity\Devis"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.NI3GIqK.App\Controller\DevisController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DevisController::edit()"/>
+      <argument>App\Controller\DevisController::edit()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.egipcEH" method="withContext"/>
+      <factory service=".service_locator.NI3GIqK" method="withContext"/>
     </service>
-    <service id=".service_locator.tYRiWvh.App\Controller\MesureController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\MesureController::index()"/>
-      <argument>App\Controller\MesureController::index()</argument>
+    <service id=".service_locator.NI3GIqK.App\Controller\DevisController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DevisController::delete()"/>
+      <argument>App\Controller\DevisController::delete()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.tYRiWvh" method="withContext"/>
+      <factory service=".service_locator.NI3GIqK" method="withContext"/>
     </service>
-    <service id=".service_locator.egipcEH.App\Controller\VoirHaieController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\VoirHaieController::index()"/>
-      <argument>App\Controller\VoirHaieController::index()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.egipcEH" method="withContext"/>
-    </service>
-    <service id=".service_locator.E1KAn24" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.c47wiQB" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
-        <argument key="App\Controller\CreerHaieController::index" type="service_closure" id=".service_locator.egipcEH.App\Controller\CreerHaieController::index()"/>
-        <argument key="App\Controller\DevisController::index" type="service_closure" id=".service_locator.tYRiWvh.App\Controller\DevisController::index()"/>
-        <argument key="App\Controller\HaieController::haie_creer" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::haie_creer()"/>
-        <argument key="App\Controller\HaieController::haie_voir" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::haie_voir()"/>
-        <argument key="App\Controller\HaieController::modifier_haie" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::modifier_haie()"/>
-        <argument key="App\Controller\HaieController::supprimer_haie" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::supprimer_haie()"/>
-        <argument key="App\Controller\MesureController::index" type="service_closure" id=".service_locator.tYRiWvh.App\Controller\MesureController::index()"/>
-        <argument key="App\Controller\VoirHaieController::index" type="service_closure" id=".service_locator.egipcEH.App\Controller\VoirHaieController::index()"/>
+        <argument key="App\Controller\ClientController::index" type="service_closure" id=".service_locator.zroWs1n.App\Controller\ClientController::index()"/>
+        <argument key="App\Controller\ClientController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\ClientController::new()"/>
+        <argument key="App\Controller\ClientController::show" type="service_closure" id=".service_locator.0jUX5FG.App\Controller\ClientController::show()"/>
+        <argument key="App\Controller\ClientController::edit" type="service_closure" id=".service_locator.6agy0ro.App\Controller\ClientController::edit()"/>
+        <argument key="App\Controller\ClientController::delete" type="service_closure" id=".service_locator.6agy0ro.App\Controller\ClientController::delete()"/>
+        <argument key="App\Controller\DevisController::index" type="service_closure" id=".service_locator.s8rI1sG.App\Controller\DevisController::index()"/>
+        <argument key="App\Controller\DevisController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\DevisController::new()"/>
+        <argument key="App\Controller\DevisController::show" type="service_closure" id=".service_locator.XyKmQoN.App\Controller\DevisController::show()"/>
+        <argument key="App\Controller\DevisController::edit" type="service_closure" id=".service_locator.NI3GIqK.App\Controller\DevisController::edit()"/>
+        <argument key="App\Controller\DevisController::delete" type="service_closure" id=".service_locator.NI3GIqK.App\Controller\DevisController::delete()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
-        <argument key="App\Controller\CreerHaieController:index" type="service_closure" id=".service_locator.egipcEH.App\Controller\CreerHaieController::index()"/>
-        <argument key="App\Controller\DevisController:index" type="service_closure" id=".service_locator.tYRiWvh.App\Controller\DevisController::index()"/>
-        <argument key="App\Controller\HaieController:haie_creer" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::haie_creer()"/>
-        <argument key="App\Controller\HaieController:haie_voir" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::haie_voir()"/>
-        <argument key="App\Controller\HaieController:modifier_haie" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::modifier_haie()"/>
-        <argument key="App\Controller\HaieController:supprimer_haie" type="service_closure" id=".service_locator.egipcEH.App\Controller\HaieController::supprimer_haie()"/>
-        <argument key="App\Controller\MesureController:index" type="service_closure" id=".service_locator.tYRiWvh.App\Controller\MesureController::index()"/>
-        <argument key="App\Controller\VoirHaieController:index" type="service_closure" id=".service_locator.egipcEH.App\Controller\VoirHaieController::index()"/>
+        <argument key="App\Controller\ClientController:index" type="service_closure" id=".service_locator.zroWs1n.App\Controller\ClientController::index()"/>
+        <argument key="App\Controller\ClientController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\ClientController::new()"/>
+        <argument key="App\Controller\ClientController:show" type="service_closure" id=".service_locator.0jUX5FG.App\Controller\ClientController::show()"/>
+        <argument key="App\Controller\ClientController:edit" type="service_closure" id=".service_locator.6agy0ro.App\Controller\ClientController::edit()"/>
+        <argument key="App\Controller\ClientController:delete" type="service_closure" id=".service_locator.6agy0ro.App\Controller\ClientController::delete()"/>
+        <argument key="App\Controller\DevisController:index" type="service_closure" id=".service_locator.s8rI1sG.App\Controller\DevisController::index()"/>
+        <argument key="App\Controller\DevisController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\DevisController::new()"/>
+        <argument key="App\Controller\DevisController:show" type="service_closure" id=".service_locator.XyKmQoN.App\Controller\DevisController::show()"/>
+        <argument key="App\Controller\DevisController:edit" type="service_closure" id=".service_locator.NI3GIqK.App\Controller\DevisController::edit()"/>
+        <argument key="App\Controller\DevisController:delete" type="service_closure" id=".service_locator.NI3GIqK.App\Controller\DevisController::delete()"/>
       </argument>
     </service>
     <service id=".service_locator.HxALDTI" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8322,9 +8372,12 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.BVm0jQp" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.bychxok" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\CategorieType" type="service_closure" id="App\Form\CategorieType"/>
+        <argument key="App\Form\ClientType" type="service_closure" id="App\Form\ClientType"/>
+        <argument key="App\Form\DevisType" type="service_closure" id="App\Form\DevisType"/>
         <argument key="App\Form\HaieType" type="service_closure" id="App\Form\HaieType"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service_closure" id="form.type.form"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
@@ -8460,11 +8513,14 @@
         <argument key="turbo.doctrine.event_listener" type="service_closure" id="turbo.doctrine.event_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.D0vW.8c" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.67NrZsg" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\CategorieRepository" type="service_closure" id="App\Repository\CategorieRepository"/>
+        <argument key="App\Repository\ClientRepository" type="service_closure" id="App\Repository\ClientRepository"/>
+        <argument key="App\Repository\DevisRepository" type="service_closure" id="App\Repository\DevisRepository"/>
         <argument key="App\Repository\HaieRepository" type="service_closure" id="App\Repository\HaieRepository"/>
+        <argument key="App\Repository\TaillerRepository" type="service_closure" id="App\Repository\TaillerRepository"/>
       </argument>
     </service>
     <service id=".service_locator.BxSdgVt" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8721,45 +8777,15 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.ZyP9f7K.App\Controller\AccueilController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\AccueilController"/>
-      <argument>App\Controller\AccueilController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
-    </service>
-    <service id=".service_locator.ZyP9f7K.App\Controller\ChoixController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\ChoixController"/>
-      <argument>App\Controller\ChoixController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
-    </service>
-    <service id=".service_locator.ZyP9f7K.App\Controller\CreerHaieController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CreerHaieController"/>
-      <argument>App\Controller\CreerHaieController</argument>
+    <service id=".service_locator.ZyP9f7K.App\Controller\ClientController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ClientController"/>
+      <argument>App\Controller\ClientController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.ZyP9f7K" method="withContext"/>
     </service>
     <service id=".service_locator.ZyP9f7K.App\Controller\DevisController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\DevisController"/>
       <argument>App\Controller\DevisController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
-    </service>
-    <service id=".service_locator.ZyP9f7K.App\Controller\HaieController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\HaieController"/>
-      <argument>App\Controller\HaieController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
-    </service>
-    <service id=".service_locator.ZyP9f7K.App\Controller\MesureController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\MesureController"/>
-      <argument>App\Controller\MesureController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
-    </service>
-    <service id=".service_locator.ZyP9f7K.App\Controller\VoirHaieController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\VoirHaieController"/>
-      <argument>App\Controller\VoirHaieController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.ZyP9f7K" method="withContext"/>
     </service>
@@ -8955,13 +8981,8 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
-          <argument>App\Controller\AccueilController</argument>
-          <argument>App\Controller\ChoixController</argument>
-          <argument>App\Controller\CreerHaieController</argument>
+          <argument>App\Controller\ClientController</argument>
           <argument>App\Controller\DevisController</argument>
-          <argument>App\Controller\HaieController</argument>
-          <argument>App\Controller\MesureController</argument>
-          <argument>App\Controller\VoirHaieController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
       </call>
@@ -9192,6 +9213,18 @@
     </service>
     <service id=".errored..service_locator.zHyJIs5.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.zHyJIs5&quot;: it needs an instance of &quot;Symfony\Component\Config\Loader\LoaderInterface&quot; but this type has been excluded from autowiring."/>
+    </service>
+    <service id=".errored..service_locator.0jUX5FG.App\Entity\Client" class="App\Entity\Client">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.0jUX5FG&quot;: it needs an instance of &quot;App\Entity\Client&quot; but this type has been excluded because it's a Doctrine entity."/>
+    </service>
+    <service id=".errored..service_locator.6agy0ro.App\Entity\Client" class="App\Entity\Client">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.6agy0ro&quot;: it needs an instance of &quot;App\Entity\Client&quot; but this type has been excluded because it's a Doctrine entity."/>
+    </service>
+    <service id=".errored..service_locator.XyKmQoN.App\Entity\Devis" class="App\Entity\Devis">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.XyKmQoN&quot;: it needs an instance of &quot;App\Entity\Devis&quot; but this type has been excluded because it's a Doctrine entity."/>
+    </service>
+    <service id=".errored..service_locator.NI3GIqK.App\Entity\Devis" class="App\Entity\Devis">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.NI3GIqK&quot;: it needs an instance of &quot;App\Entity\Devis&quot; but this type has been excluded because it's a Doctrine entity."/>
     </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
@@ -10397,7 +10430,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.E1KAn24"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.c47wiQB"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10441,8 +10474,13 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.n_ENPtW" alias=".service_locator.zHyJIs5"/>
+    <service id=".service_locator.hYW3jgd" alias=".service_locator.zroWs1n"/>
     <service id=".service_locator.5Vd5JYV" alias=".service_locator.egipcEH"/>
-    <service id=".service_locator.GrnuCSb" alias=".service_locator.tYRiWvh"/>
+    <service id=".service_locator.IquIPpp" alias=".service_locator.0jUX5FG"/>
+    <service id=".service_locator.FbGZFgM" alias=".service_locator.6agy0ro"/>
+    <service id=".service_locator.sx4Jrm2" alias=".service_locator.s8rI1sG"/>
+    <service id=".service_locator.oWEkOrU" alias=".service_locator.XyKmQoN"/>
+    <service id=".service_locator.wUhlYSH" alias=".service_locator.NI3GIqK"/>
     <service id=".service_locator.9nvaCmp" alias=".service_locator.ZyP9f7K"/>
   </services>
 </container>

@@ -16,6 +16,8 @@ return [
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/accueil' => [[['_route' => 'app_accueil', '_controller' => 'App\\Controller\\AccueilController::index'], null, null, null, false, false, null]],
+        '/categorie' => [[['_route' => 'app_categorie_index', '_controller' => 'App\\Controller\\CategorieController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/categorie/new' => [[['_route' => 'app_categorie_new', '_controller' => 'App\\Controller\\CategorieController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/choix' => [[['_route' => 'app_choix', '_controller' => 'App\\Controller\\ChoixController::index'], null, null, null, false, false, null]],
         '/creer/haie' => [[['_route' => 'app_creer_haie', '_controller' => 'App\\Controller\\CreerHaieController::index'], null, null, null, false, false, null]],
         '/devis' => [[['_route' => 'app_devis', '_controller' => 'App\\Controller\\DevisController::index'], null, null, null, false, false, null]],
@@ -43,11 +45,17 @@ return [
                         .')'
                     .')'
                 .')'
-                .'|/haie/(?'
-                    .'|([^/]++)(*:219)'
-                    .'|modifier/([^/]++)(*:244)'
-                    .'|supprimer/([^/]++)(*:270)'
+                .'|/categorie/([^/]++)(?'
+                    .'|(*:224)'
+                    .'|/edit(*:237)'
+                    .'|(*:245)'
                 .')'
+                .'|/haie/(?'
+                    .'|([^/]++)(*:271)'
+                    .'|modifier/([^/]++)(*:296)'
+                    .'|supprimer/([^/]++)(*:322)'
+                .')'
+                .'|/modifier/haie/([^/]++)(*:354)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -59,10 +67,14 @@ return [
         168 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        219 => [[['_route' => 'app_haie_voir', '_controller' => 'App\\Controller\\HaieController::haie_voir'], ['code'], null, null, false, true, null]],
-        244 => [[['_route' => 'app_haie_modifier', '_controller' => 'App\\Controller\\HaieController::modifier_haie'], ['code'], null, null, false, true, null]],
-        270 => [
-            [['_route' => 'app_haie_supprimer', '_controller' => 'App\\Controller\\HaieController::supprimer_haie'], ['code'], null, null, false, true, null],
+        224 => [[['_route' => 'app_categorie_show', '_controller' => 'App\\Controller\\CategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        237 => [[['_route' => 'app_categorie_edit', '_controller' => 'App\\Controller\\CategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        245 => [[['_route' => 'app_categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        271 => [[['_route' => 'app_haie_voir', '_controller' => 'App\\Controller\\HaieController::haie_voir'], ['code'], null, null, false, true, null]],
+        296 => [[['_route' => 'app_haie_modifier', '_controller' => 'App\\Controller\\HaieController::modifier_haie'], ['code'], null, null, false, true, null]],
+        322 => [[['_route' => 'app_haie_supprimer', '_controller' => 'App\\Controller\\HaieController::supprimer_haie'], ['code'], null, null, false, true, null]],
+        354 => [
+            [['_route' => 'app_modifier_haie', '_controller' => 'App\\Controller\\ModifierHaieController::index'], ['code'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

@@ -1,28 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DevisController!{% endblock %}
+{% block title %}Devis index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-{% set montant_total = 0 %}
-{% set prix_unitaire = type_de_haie.prix %}
-{% set longueur = longueur %}
-{% set hauteur = hauteur %}
-{% set multiplier = 1 %}
-{% if hauteur > 1.5 %}
-    {% set multiplier = 1.5 %}
-{% endif %}
-{% set prix = prix_unitaire * longueur %}
-{% set montant_total = prix * multiplier %}
-{% if monChoix == 'entreprise' %}
-    {% set montant_total = montant_total * 0.9 %}
-{% endif %}
-<div class="example-wrapper">
-    Vous êtes un {{monChoix}} </br>
-    Rappel -- Mesures de la haie : Longueur {{longueur}} m , Hauteur {{hauteur}} m , Type de haie : {{type_de_haie.nom}} .</br>
-    Le montant total de votre devis est de : {{montant_total}} €.
-</div>
+    <h1>Devis index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for devi in devis %}
+            <tr>
+                <td>{{ devi.no }}</td>
+                <td>{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_devis_show', {'no': devi.no}) }}">show</a>
+                    <a href="{{ path('app_devis_edit', {'no': devi.no}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_devis_new') }}">Create new</a>
 {% endblock %}

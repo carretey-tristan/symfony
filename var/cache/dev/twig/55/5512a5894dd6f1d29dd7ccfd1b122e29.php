@@ -90,12 +90,23 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         yield "\">Consultation/Modification</a></li>
                 </ul>
             </li>
+            <li>gestion des catégories de haies
+                <ul>
+                    <li><a href=\"";
+        // line 28
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_new");
+        yield "\">Création</a></li>
+                    <li><a href=\"";
+        // line 29
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_index");
+        yield "\">Consultation/Modification</a></li>
+                </ul>
         </ul>
 
         ";
-        // line 28
+        // line 33
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 30
+        // line 35
         yield "    </body>
 </html>
 ";
@@ -155,7 +166,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         yield from [];
     }
 
-    // line 28
+    // line 33
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -168,7 +179,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 29
+        // line 34
         yield "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -200,7 +211,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  172 => 29,  159 => 28,  148 => 8,  135 => 7,  112 => 5,  99 => 30,  97 => 28,  89 => 23,  85 => 22,  77 => 17,  71 => 14,  64 => 9,  62 => 7,  57 => 5,  51 => 1,);
+        return array (  183 => 34,  170 => 33,  159 => 8,  146 => 7,  123 => 5,  110 => 35,  108 => 33,  101 => 29,  97 => 28,  89 => 23,  85 => 22,  77 => 17,  71 => 14,  64 => 9,  62 => 7,  57 => 5,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -230,6 +241,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                     <li><a href=\"{{ path('app_voir_haie') }}\">Consultation/Modification</a></li>
                 </ul>
             </li>
+            <li>gestion des catégories de haies
+                <ul>
+                    <li><a href=\"{{ path('app_categorie_new') }}\">Création</a></li>
+                    <li><a href=\"{{ path('app_categorie_index') }}\">Consultation/Modification</a></li>
+                </ul>
         </ul>
 
         {% block body %}

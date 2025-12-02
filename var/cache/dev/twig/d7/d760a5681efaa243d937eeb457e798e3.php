@@ -121,7 +121,7 @@ class __TwigTemplate_ffcb72e9cf00103e69e7fa09ae8dfde5 extends Template
             <td>";
             // line 21
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["haie"], "code", [], "any", false, false, false, 21), "html", null, true);
-            yield "</td>
+            yield "</td>²
             <td>";
             // line 22
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["haie"], "nom", [], "any", false, false, false, 22), "html", null, true);
@@ -130,13 +130,19 @@ class __TwigTemplate_ffcb72e9cf00103e69e7fa09ae8dfde5 extends Template
             // line 23
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["haie"], "prix", [], "any", false, false, false, 23), "html", null, true);
             yield "</td>
+            <td><a href=\"";
+            // line 24
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_modifier_haie", ["code" => CoreExtension::getAttribute($this->env, $this->source, $context["haie"], "code", [], "any", false, false, false, 24)]), "html", null, true);
+            yield "\">
+    Consultation/Modification
+</a></td>
         </tr>
     ";
             $context['_iterated'] = true;
         }
-        // line 25
+        // line 28
         if (!$context['_iterated']) {
-            // line 26
+            // line 29
             yield "        <tr>
             <td colspan=\"4\">no records found</td>
         </tr>
@@ -145,7 +151,7 @@ class __TwigTemplate_ffcb72e9cf00103e69e7fa09ae8dfde5 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['haie'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 30
+        // line 33
         yield "    </tbody>
 
 ";
@@ -179,7 +185,7 @@ class __TwigTemplate_ffcb72e9cf00103e69e7fa09ae8dfde5 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  149 => 30,  140 => 26,  138 => 25,  131 => 23,  127 => 22,  123 => 21,  120 => 20,  115 => 19,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  155 => 33,  146 => 29,  144 => 28,  135 => 24,  131 => 23,  127 => 22,  123 => 21,  120 => 20,  115 => 19,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -204,9 +210,12 @@ class __TwigTemplate_ffcb72e9cf00103e69e7fa09ae8dfde5 extends Template
     <tbody>
     {% for haie in haies %}
         <tr>
-            <td>{{ haie.code }}</td>
+            <td>{{ haie.code }}</td>²
             <td>{{ haie.nom }}</td>
             <td>{{ haie.prix }}</td>
+            <td><a href=\"{{ path('app_modifier_haie', { 'code': haie.code }) }}\">
+    Consultation/Modification
+</a></td>
         </tr>
     {% else %}
         <tr>
