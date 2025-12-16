@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
@@ -12,8 +13,8 @@ class Client
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $no = null;
+    #[ORM\Column(name: 'no', type: 'integer')]
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
@@ -30,8 +31,8 @@ class Client
     #[ORM\Column]
     private ?int $cp = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $type_client = null;
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $type_client = null;
 
     /**
      * @var Collection<int, Devis>
@@ -46,7 +47,7 @@ class Client
 
     public function getId(): ?int
     {
-        return $this->no;
+        return $this->id;
     }
 
     public function getNom(): ?string
@@ -109,12 +110,12 @@ class Client
         return $this;
     }
 
-    public function getTypeClient(): ?string
+    public function getTypeClient()
     {
         return $this->type_client;
     }
 
-    public function setTypeClient(string $type_client): static
+    public function setTypeClient($type_client): static
     {
         $this->type_client = $type_client;
 

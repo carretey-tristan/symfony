@@ -121,7 +121,7 @@ class __TwigTemplate_ffcb72e9cf00103e69e7fa09ae8dfde5 extends Template
             <td>";
             // line 21
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["haie"], "code", [], "any", false, false, false, 21), "html", null, true);
-            yield "</td>²
+            yield "</td>
             <td>";
             // line 22
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["haie"], "nom", [], "any", false, false, false, 22), "html", null, true);
@@ -210,7 +210,7 @@ class __TwigTemplate_ffcb72e9cf00103e69e7fa09ae8dfde5 extends Template
     <tbody>
     {% for haie in haies %}
         <tr>
-            <td>{{ haie.code }}</td>²
+            <td>{{ haie.code }}</td>
             <td>{{ haie.nom }}</td>
             <td>{{ haie.prix }}</td>
             <td><a href=\"{{ path('app_modifier_haie', { 'code': haie.code }) }}\">

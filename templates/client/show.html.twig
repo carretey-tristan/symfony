@@ -1,15 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Client{% endblock %}
-
 {% block body %}
     <h1>Client</h1>
-
     <table class="table">
         <tbody>
             <tr>
-                <th>No</th>
-                <td>{{ client.no }}</td>
+                <th>Id</th>
+                <td>{{ client.id }}</td>
             </tr>
             <tr>
                 <th>Nom</th>
@@ -40,7 +38,7 @@
 
     <a href="{{ path('app_client_index') }}">back to list</a>
 
-    <a href="{{ path('app_client_edit', {'no': client.no}) }}">edit</a>
+    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
 
     {{ include('client/_delete_form.html.twig') }}
 {% endblock %}

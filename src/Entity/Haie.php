@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\HaieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Entity\Tailler;
+use App\Entity\Categorie;
 
 #[ORM\Entity(repositoryClass: HaieRepository::class)]
 class Haie
@@ -23,18 +25,13 @@ class Haie
 
     #[ORM\ManyToOne(inversedBy: 'haies')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?categorie $categorie = null;
+    private ?Categorie $categorie = null;
 
     /**
      * @var Collection<int, Tailler>
      */
     #[ORM\OneToMany(targetEntity: Tailler::class, mappedBy: 'Haie')]
     private Collection $taillers;
-
-    public function __construct()
-    {
-        $this->taillers = new ArrayCollection();
-    }
 
 
     public function getCode(): ?string
@@ -73,12 +70,17 @@ class Haie
         return $this;
     }
 
-    public function getCategorie(): ?categorie
+    public function __construct()
+    {
+        $this->taillers = new ArrayCollection();
+    }
+
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?categorie $categorie): static
+    public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
 
@@ -106,7 +108,6 @@ class Haie
     public function removeTailler(Tailler $tailler): static
     {
         if ($this->taillers->removeElement($tailler)) {
-            // set the owning side to null (unless already changed)
             if ($tailler->getHaie() === $this) {
                 $tailler->setHaie(null);
             }

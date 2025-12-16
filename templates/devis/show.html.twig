@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Devis</h1>
-
+    <h2>Informations</h2>
     <table class="table">
         <tbody>
             <tr>
@@ -15,12 +15,87 @@
                 <th>Date</th>
                 <td>{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>Client</th>
+                <td>
+                    {% if devi.client is not null %}
+                        {{ devi.client.nom }} {{ devi.client.prenom }}<br>
+                        {{ devi.client.adresse }} - {{ devi.client.ville }} {{ devi.client.cp }}<br>
+                        <strong>Type:</strong>
+                        {% if devi.client.typeClient %}
+                            Particulier
+                        {% else %}
+                            Professionnel
+                        {% endif %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_devis_index') }}">back to list</a>
+    <h2>Détails des taillers</h2>
+    {% set total = 0 %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Haie</th>
+                <th>Hauteur</th>
+                <th>Longueur</th>
+                <th>Prix unité</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tailler in devi.taillers %}
+            {% set hauteur = tailler.hauteur is not empty ? (tailler.hauteur + 0) : 0 %}
+            {% set longueur = tailler.longueur is not empty ? (tailler.longueur + 0) : 0 %}
 
-    <a href="{{ path('app_devis_edit', {'no': devi.no}) }}">edit</a>
+            {% set unitPrice = (tailler.haie is not null and tailler.haie.prix is not empty) ? (tailler.haie.prix + 0) : 0 %}
 
+
+            {% set base = unitPrice * longueur %}
+
+            {% set heightMultiplier = (hauteur > 1.5) ? 1.5 : 1 %}
+            {% set withHeight = base * heightMultiplier %}
+
+            {% set discountMultiplier = 1 %}
+            {% if devi.client is not null and devi.client.typeClient is not null and devi.client.typeClient == false %}
+                {% set discountMultiplier = 0.9 %}
+            {% endif %}
+            {% set prix = withHeight * discountMultiplier %}
+            {% set total = total + prix %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% if tailler.haie is not null %}
+                        {{ tailler.haie.code }} - {{ tailler.haie.nom }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>{{ hauteur }}</td>
+                <td>{{ longueur }}</td>
+                <td>{{ unitPrice|number_format(2, ',', ' ') }}</td>
+                <td>{{ prix|number_format(2, ',', ' ') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun tailler enregistré pour ce devis.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="6" style="text-align:right">Total</th>
+                <th>{{ total|number_format(2, ',', ' ') }}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <a href="{{ path('app_devis_index') }}">Retour à la liste</a>
+    <a href="{{ path('app_devis_edit', {'devi': devi.no}) }}">Modifier</a>
     {{ include('devis/_delete_form.html.twig') }}
 {% endblock %}

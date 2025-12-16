@@ -32,7 +32,6 @@ class __TwigTemplate_39c9c2cdc3fe3e0ae1a97f2ca505e069 extends Template
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
-            'content' => [$this, 'block_content'],
         ];
     }
 
@@ -103,38 +102,19 @@ class __TwigTemplate_39c9c2cdc3fe3e0ae1a97f2ca505e069 extends Template
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-
-";
+<div class=\"example-wrapper\">
+    <h1>Hello ";
         // line 12
-        yield from $this->unwrap()->yieldBlock('content', $context, $blocks);
-        
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 12, $this->source); })()), "html", null, true);
+        yield "! ✅</h1>
 
-        
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
-
-        yield from [];
-    }
-
-    /**
-     * @return iterable<null|scalar|\Stringable>
-     */
-    public function block_content(array $context, array $blocks = []): iterable
-    {
-        $macros = $this->macros;
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
-
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
-
-        // line 13
-        yield "    <h2>Modifier un type de haie</h2>
-    ";
-        // line 14
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 14, $this->source); })()), 'form');
-        yield "  
-    ";
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>C:/Random/Github/test/symfony-1520b5961ecc6b472ec2e53bb4863ecb926fb1fb/src/Controller/ModifierHaieController.php</code></li>
+        <li>Your template at <code>C:/Random/Github/test/symfony-1520b5961ecc6b472ec2e53bb4863ecb926fb1fb/templates/modifier_haie/index.html.twig</code></li>
+    </ul>
+</div>
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -165,7 +145,7 @@ class __TwigTemplate_39c9c2cdc3fe3e0ae1a97f2ca505e069 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  135 => 14,  132 => 13,  109 => 12,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+        return array (  108 => 12,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -180,11 +160,15 @@ class __TwigTemplate_39c9c2cdc3fe3e0ae1a97f2ca505e069 extends Template
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+<div class=\"example-wrapper\">
+    <h1>Hello {{ controller_name }}! ✅</h1>
 
-{% block content %}
-    <h2>Modifier un type de haie</h2>
-    {{ form(form) }}  
-    {% endblock %}
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>C:/Random/Github/test/symfony-1520b5961ecc6b472ec2e53bb4863ecb926fb1fb/src/Controller/ModifierHaieController.php</code></li>
+        <li>Your template at <code>C:/Random/Github/test/symfony-1520b5961ecc6b472ec2e53bb4863ecb926fb1fb/templates/modifier_haie/index.html.twig</code></li>
+    </ul>
+</div>
 {% endblock %}
 ", "modifier_haie/index.html.twig", "C:\\Random\\Github\\symfony\\templates\\modifier_haie\\index.html.twig");
     }

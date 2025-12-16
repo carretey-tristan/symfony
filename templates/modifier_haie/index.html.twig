@@ -8,9 +8,13 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
 
-{% block content %}
-    <h2>Modifier un type de haie</h2>
-    {{ form(form) }}  
-    {% endblock %}
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>C:/Random/Github/test/symfony-1520b5961ecc6b472ec2e53bb4863ecb926fb1fb/src/Controller/ModifierHaieController.php</code></li>
+        <li>Your template at <code>C:/Random/Github/test/symfony-1520b5961ecc6b472ec2e53bb4863ecb926fb1fb/templates/modifier_haie/index.html.twig</code></li>
+    </ul>
+</div>
 {% endblock %}

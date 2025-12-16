@@ -19,8 +19,8 @@
                 <td>{{ devi.no }}</td>
                 <td>{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_devis_show', {'no': devi.no}) }}">show</a>
-                    <a href="{{ path('app_devis_edit', {'no': devi.no}) }}">edit</a>
+                    <a href="{{ path('app_devis_show', {'devi': devi.no}) }}">show</a>
+                    <a href="{{ path('app_devis_edit', {'devi': devi.no}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

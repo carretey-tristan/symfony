@@ -1,0 +1,144 @@
+/* Gardener - Floral stylesheet
+   Usable directly: linked as `/css/gardener.css` in templates/base.html.twig
+*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;600&display=swap');
+
+:root{
+  --bg-1: #f6f8f3; /* light parchment */
+  --accent: #6b8e23; /* olive drab */
+  --accent-2: #9bbf5b; /* soft leaf */
+  --muted: #6b6b6b;
+  --card-bg: rgba(255,255,255,0.85);
+  --rose: #f1c6d0;
+  --shadow: 0 6px 18px rgba(29,30,31,0.08);
+}
+
+html,body{
+  height:100%;
+}
+body{
+  margin:0;
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #f8fbf6 0%, var(--bg-1) 100%);
+  color:#2b2b2b;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-image: radial-gradient(circle at 10% 10%, rgba(155,191,91,0.06) 0px, transparent 120px),
+                    radial-gradient(circle at 90% 80%, rgba(107,142,35,0.04) 0px, transparent 180px);
+}
+
+/* subtle floral SVG tiled at the top-right for decoration */
+body::after{
+  content:'';
+  position:fixed;
+  right:-60px;
+  top:-40px;
+  width:420px;
+  height:420px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 200 200'><g fill='%239bbf5b' opacity='0.08'><circle cx='30' cy='30' r='20'/><circle cx='70' cy='60' r='18'/><circle cx='150' cy='40' r='24'/><circle cx='120' cy='120' r='30'/></g><g fill='%23f1c6d0' opacity='0.06'><path d='M10 160c20-30 60-40 80-22 16 15 36 10 54-4 18-14 34-8 46 8 12 16 6 34-8 44-14 10-40 10-72-10C56 166 26 176 10 160z'/></g></svg>");
+  pointer-events:none;
+  transform:rotate(10deg);
+}
+
+/* Layout */
+nav{
+  width:240px;
+  position:fixed;
+  left:18px;
+  top:22px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), var(--card-bg));
+  border-radius:12px;
+  padding:18px 16px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(107,142,35,0.06);
+}
+nav h3{
+  margin:0 0 8px 0;
+  font-family: 'Playfair Display', serif;
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing:0.2px;
+}
+nav ul{ list-style:none; margin:0; padding:0; }
+nav li{ margin:6px 0; color:var(--muted); font-size:14px; }
+nav li > a{ color:var(--accent); text-decoration:none; font-weight:600 }
+nav li ul{ margin-top:6px; margin-left:10px }
+nav li ul li{ font-size:13px; color:#4c4c4c }
+
+main{
+  margin-left:300px;
+  padding:48px 64px;
+  min-height:100vh;
+}
+
+.card{
+  max-width:1100px;
+  margin:24px auto;
+  background:var(--card-bg);
+  border-radius:14px;
+  padding:28px 36px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(107,142,35,0.06);
+}
+
+/* Headings & typography */
+h1,h2,h3{ font-family: 'Playfair Display', serif; color:var(--accent); margin:0 0 12px 0 }
+h1{ font-size:32px }
+h2{ font-size:24px }
+p{ line-height:1.6; color:#444 }
+
+.btn{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:999px;
+  background: linear-gradient(90deg,var(--accent-2),var(--accent));
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow: 0 6px 14px rgba(107,142,35,0.12);
+}
+
+/* Form elements, tables */
+input,textarea,select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(42,42,42,0.06);
+  background:rgba(255,255,255,0.9);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  font-size:14px;
+  color:#222;
+}
+
+table{ width:100%; border-collapse:collapse }
+th,td{ padding:10px 12px; border-bottom:1px solid rgba(0,0,0,0.04) }
+th{ text-align:left; color:var(--muted); font-weight:600 }
+
+/* small floral badges */
+.flower-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  background:linear-gradient(180deg, rgba(241,198,208,0.14), rgba(155,191,91,0.06));
+  padding:6px 10px; border-radius:999px; color:var(--accent);
+  font-weight:600; font-size:13px;
+}
+.flower-badge svg{ width:18px; height:18px }
+
+/* responsive */
+@media (max-width:900px){
+  nav{ position:relative; width:100%; left:0; top:0; margin:14px; }
+  main{ margin-left:0; padding:24px }
+}
+
+/* small decorative footer */
+footer{
+  margin-top:48px; text-align:center; color:var(--muted); font-size:13px; padding:22px 8px;
+}
+
+/* utility */
+.muted{ color:var(--muted) }
+
+/* gentle hover for links in content */
+a{ color:var(--accent); text-decoration:none }
+a:hover{ text-decoration:underline; color:var(--accent-2) }
+
+/* End gardener.css */

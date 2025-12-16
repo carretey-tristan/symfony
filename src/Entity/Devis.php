@@ -20,22 +20,23 @@ class Devis
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'devis')]
+    #[ORM\JoinColumn(name: 'client_no', referencedColumnName: 'no', nullable: true)]
+    private ?Client $client = null;
+
     /**
      * @var Collection<int, Tailler>
      */
-    #[ORM\OneToMany(targetEntity: Tailler::class, mappedBy: 'Devis')]
+    #[ORM\OneToMany(targetEntity: Tailler::class, mappedBy: 'devis')]
     private Collection $taillers;
 
-    #[ORM\ManyToOne(inversedBy: 'devis')]
-    #[ORM\JoinColumn(name: 'client_no', referencedColumnName: 'no', nullable: false)]
-    private ?Client $client = null;
 
     public function __construct()
     {
         $this->taillers = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getno(): ?int
     {
         return $this->no;
     }
@@ -48,6 +49,18 @@ class Devis
     public function setDate(\DateTime $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }
@@ -78,18 +91,6 @@ class Devis
                 $tailler->setDevis(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): static
-    {
-        $this->client = $client;
 
         return $this;
     }

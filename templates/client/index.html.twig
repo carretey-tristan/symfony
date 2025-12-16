@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>No</th>
+                <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Adresse</th>
@@ -21,7 +21,7 @@
         <tbody>
         {% for client in clients %}
             <tr>
-                <td>{{ client.no }}</td>
+                <td>{{ client.id }}</td>
                 <td>{{ client.nom }}</td>
                 <td>{{ client.prenom }}</td>
                 <td>{{ client.adresse }}</td>
@@ -29,8 +29,8 @@
                 <td>{{ client.cp }}</td>
                 <td>{{ client.typeClient }}</td>
                 <td>
-                    <a href="{{ path('app_client_show', {'no': client.no}) }}">show</a>
-                    <a href="{{ path('app_client_edit', {'no': client.no}) }}">edit</a>
+                    <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a>
+                    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

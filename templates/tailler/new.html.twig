@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Tailler{% endblock %}
+
+{% block body %}
+    <h1>Create new Tailler</h1>
+
+    {{ include('tailler/_form.html.twig') }}
+
+    <a href="{{ path('app_tailler_index') }}">back to list</a>
+{% endblock %}

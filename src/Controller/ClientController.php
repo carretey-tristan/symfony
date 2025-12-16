@@ -30,19 +30,28 @@ final class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // convert checkbox to stored value (0/1 as string to be compatible with existing column)
+            $isEntreprise = (bool) $form->get('type_client_bool')->getData();
+            $client->setTypeClient($isEntreprise ? '1' : '0');
+
             $entityManager->persist($client);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        // pre-fill checkbox from current stored value
+        $current = $client->getTypeClient();
+        $isEntreprise = in_array(strval($current), ['1', 'true', 'oui', 'yes', 'pro', 'professionnel'], true);
+        $form->get('type_client_bool')->setData($isEntreprise);
+
         return $this->render('client/new.html.twig', [
             'client' => $client,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{no}', name: 'app_client_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_client_show', methods: ['GET'])]
     public function show(Client $client): Response
     {
         return $this->render('client/show.html.twig', [
@@ -50,28 +59,38 @@ final class ClientController extends AbstractController
         ]);
     }
 
-    #[Route('/{no}/edit', name: 'app_client_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_client_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Client $client, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // convert checkbox to stored value
+            $isEntreprise = (bool) $form->get('type_client_bool')->getData();
+            $client->setTypeClient($isEntreprise ? '1' : '0');
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        // pre-fill checkbox
+        $current = $client->getTypeClient();
+        $isEntreprise = in_array(strval($current), ['1', 'true', 'oui', 'yes', 'pro', 'professionnel'], true);
+        $form->get('type_client_bool')->setData($isEntreprise);
+
         return $this->render('client/edit.html.twig', [
             'client' => $client,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{no}', name: 'app_client_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_client_delete', methods: ['POST'])]
     public function delete(Request $request, Client $client, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$client->getNo(), $request->getPayload()->getString('_token'))) {
+        $token = $request->request->get('_token');
+        if ($this->isCsrfTokenValid('delete'.$client->getId(), $token)) {
             $entityManager->remove($client);
             $entityManager->flush();
         }

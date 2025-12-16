@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tailler index{% endblock %}
+
+{% block body %}
+    <h1>Tailler index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Hauteur</th>
+                <th>Longueur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tailler in taillers %}
+            <tr>
+                <td>{{ tailler.id }}</td>
+                <td>{{ tailler.hauteur }}</td>
+                <td>{{ tailler.longueur }}</td>
+                <td>
+                    <a href="{{ path('app_tailler_show', {'id': tailler.id}) }}">show</a>
+                    <a href="{{ path('app_tailler_edit', {'id': tailler.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tailler_new') }}">Create new</a>
+{% endblock %}

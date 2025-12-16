@@ -42,7 +42,7 @@ final class DevisController extends AbstractController
         ]);
     }
 
-    #[Route('/{no}', name: 'app_devis_show', methods: ['GET'])]
+    #[Route('/{devi}', name: 'app_devis_show', methods: ['GET'])]
     public function show(Devis $devi): Response
     {
         return $this->render('devis/show.html.twig', [
@@ -50,7 +50,7 @@ final class DevisController extends AbstractController
         ]);
     }
 
-    #[Route('/{no}/edit', name: 'app_devis_edit', methods: ['GET', 'POST'])]
+    #[Route('/{devi}/edit', name: 'app_devis_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Devis $devi, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(DevisType::class, $devi);
@@ -68,7 +68,7 @@ final class DevisController extends AbstractController
         ]);
     }
 
-    #[Route('/{no}', name: 'app_devis_delete', methods: ['POST'])]
+    #[Route('/{devi}', name: 'app_devis_delete', methods: ['POST'])]
     public function delete(Request $request, Devis $devi, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$devi->getNo(), $request->getPayload()->getString('_token'))) {

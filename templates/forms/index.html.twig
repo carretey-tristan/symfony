@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forms preview{% endblock %}
+
+{% block body %}
+    <h1>Forms page (preview)</h1>
+
+    <section>
+        <h2>Créer un Devis</h2>
+        {{ form_start(devisForm) }}
+            {{ form_widget(devisForm) }}
+            <button class="btn">Submit Devis</button>
+        {{ form_end(devisForm) }}
+    </section>
+
+    <section>
+        <h2>Ajouter une Tailler (formulaire séparé)</h2>
+        <div id="taillers-area">
+            <div class="tailler-wrapper">
+                {{ form_start(taillerForm) }}
+                    {{ form_widget(taillerForm) }}
+                    <div>
+                        <button class="btn submit-tailler">Submit Tailler</button>
+                        <button type="button" class="btn remove-tailler" style="display:none;">Remove</button>
+                    </div>
+                {{ form_end(taillerForm) }}
+            </div>
+        </div>
+
+        <button type="button" id="add-tailler" class="btn">Ajouter une Tailler</button>
+    </section>
+
+    {# Haie creation removed from this page as requested #}
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addBtn = document.getElementById('add-tailler');
+        const area = document.getElementById('taillers-area');
+
+        addBtn.addEventListener('click', function () {
+            // clone the first wrapper
+            const first = area.querySelector('.tailler-wrapper');
+            if (!first) return;
+            const clone = first.cloneNode(true);
+
+            // Clear input values in cloned form
+            clone.querySelectorAll('input, select, textarea').forEach(function(el){
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                    el.checked = false;
+                } else {
+                    el.value = '';
+                }
+            });
+
+            // show remove button on clone
+            const removeBtn = clone.querySelector('.remove-tailler');
+            if (removeBtn) removeBtn.style.display = '';
+
+            // append clone
+            area.appendChild(clone);
+        });
+
+        // delegate remove
+        area.addEventListener('click', function (e) {
+            if (e.target && e.target.matches('.remove-tailler')) {
+                const wrapper = e.target.closest('.tailler-wrapper');
+                if (wrapper) wrapper.remove();
+            }
+        });
+    });
+    </script>
+
+{% endblock %}

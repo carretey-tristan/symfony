@@ -166,6 +166,6 @@ class __TwigTemplate_3bcbc2e2a757f386b0ec5f3052272b14 extends Template
 
 </div>
 {% endblock %}
-", "accueil/index.html.twig", "C:\\Users\\Armand\\Desktop\\projet symfony\\lepetitjardinieraveclaidedestella\\templates\\accueil\\index.html.twig");
+", "accueil/index.html.twig", "C:\\Random\\Github\\symfony\\templates\\accueil\\index.html.twig");
     }
 }

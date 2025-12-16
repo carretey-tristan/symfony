@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\TaillerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: TaillerRepository::class)]
 class Tailler
@@ -26,7 +29,8 @@ class Tailler
 
     #[ORM\ManyToOne(inversedBy: 'taillers')]
     #[ORM\JoinColumn(name: 'devis_no', referencedColumnName: 'no', nullable: false)]
-    private ?Devis $Devis = null;
+    private ?Devis $devis = null;
+
 
     public function getId(): ?int
     {
@@ -71,13 +75,14 @@ class Tailler
 
     public function getDevis(): ?Devis
     {
-        return $this->Devis;
+        return $this->devis;
     }
 
-    public function setDevis(?Devis $Devis): static
+    public function setDevis(?Devis $devis): static
     {
-        $this->Devis = $Devis;
+        $this->devis = $devis;
 
         return $this;
     }
+
 }
