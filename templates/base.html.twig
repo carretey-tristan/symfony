@@ -6,7 +6,17 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="/css/ugly.css">
+            <link id="theme-stylesheet" rel="stylesheet" href="/css/ugliest.css">
+            <style>
+                /* Keep nav in normal document flow (on top of the page, not fixed to the viewport) */
+                nav{ position:relative; top:0; left:0; right:0; z-index:50; }
+                /* Give a small top margin so the content doesn't sit flush under the nav */
+                main{ margin-top:24px; }
+                /* Put decorative page overlays behind nav and content */
+                body::before, body::after{ z-index:0; }
+                /* Make the theme selector clickable above overlays */
+                #theme-select{ position:relative; z-index:60; }
+            </style>
 
         {% endblock %}
 
@@ -15,6 +25,17 @@
     <body>
         <nav>
             <h3>Admin / CRUD</h3>
+            <div style="position:absolute; right:18px; top:12px;">
+                <label for="theme-select" style="font-size:13px; margin-right:6px; color:inherit">Thème</label>
+                <select id="theme-select" aria-label="Choisir un thème">
+                    <option value="/css/gardener.css">Gardener (floral)</option>
+                    <option value="/css/ugly.css">Ugly (v1)</option>
+                    <option value="/css/uglyv2.css">Ugly v2</option>
+                    <option value="/css/uglyv3.css">Ugly v3</option>
+                    <option value="/css/abomination.css">Abomination</option>
+                    <option value="/css/ugliest.css">Ugliest</option>
+                </select>
+            </div>
             <ul>
                 <li><a href="{{ path('app_accueil') }}">Accueil</a></li>
                 <li>Clients
@@ -56,5 +77,29 @@
                 {% endblock %}
             </div>
         </main>
+        <script>
+            (function(){
+                const link = document.getElementById('theme-stylesheet');
+                const select = document.getElementById('theme-select');
+                if(!link || !select) return;
+
+                // Apply saved theme or default
+                const saved = localStorage.getItem('site-theme');
+                const defaultHref = link.getAttribute('href') || '/css/ugliest.css';
+                const hrefToUse = saved || defaultHref;
+                link.setAttribute('href', hrefToUse);
+
+                // Set select to match
+                for(const opt of select.options){
+                    if(opt.value === hrefToUse){ opt.selected = true; break; }
+                }
+
+                select.addEventListener('change', function(){
+                    const href = select.value;
+                    link.setAttribute('href', href);
+                    try{ localStorage.setItem('site-theme', href); }catch(e){}
+                });
+            })();
+        </script>
     </body>
 </html>

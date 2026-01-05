@@ -27,7 +27,7 @@ class Devis
     /**
      * @var Collection<int, Tailler>
      */
-    #[ORM\OneToMany(targetEntity: Tailler::class, mappedBy: 'devis')]
+    #[ORM\OneToMany(targetEntity: Tailler::class, mappedBy: 'devis', cascade: ['persist','remove'], orphanRemoval: true)]
     private Collection $taillers;
 
 

@@ -1,0 +1,36 @@
+/* ABOMINATION.CSS - Proposal: the most disgusting palette possible
+   Purposefully clashing, misaligned typography, huge borders, and awkward spacing.
+   Smooth animations only (no flashing). */
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Permanent+Marker&display=swap');
+
+body{ margin:0; font-family:'Gloria Hallelujah', 'Permanent Marker', cursive, sans-serif; background: repeating-linear-gradient(120deg,#f0c 0 12px,#0cf 12px 24px,#ff0 24px 36px); color:#101010 }
+
+/* Big, misaligned header */
+nav{ padding:24px; border-bottom:14px ridge #7f003f; background:linear-gradient(90deg,#fff8, #0006) }
+nav h3{ margin:0; transform:skewX(-12deg) translateY(6px); font-size:40px; color:#7f003f }
+
+.card{ margin:120px auto; max-width:1000px; padding:46px; background:linear-gradient(180deg,#ffffffee,#eeffee); border-left:18px solid #ffcc00; border-right:18px solid #00ccff }
+
+h1{ font-size:56px; letter-spacing:8px; color:#ff0044; text-shadow:6px 6px 0 #ffee00 }
+
+.btn{ padding:20px 30px; background:linear-gradient(45deg,#4400ff,#00ff44); color:#fff; border-radius:0; border:6px dashed #000 }
+
+/* Horrible forms */
+label{ display:block; transform:rotate(-2deg); margin-bottom:6px }
+input,select,textarea{ display:block; width:100%; padding:14px; margin-bottom:12px; border:8px outset #333; background:linear-gradient(180deg,#fff,#ffe4e1) }
+
+/* Forced uppercase and weird spacing for paragraphs */
+p{ text-transform:uppercase; word-spacing:12px; line-height:1.1 }
+
+/* Vertical oscillation for decorative elements (slow, non-strobbing) */
+.floaty{ animation: floaty 6s ease-in-out infinite }
+@keyframes floaty{ 0%{ transform:translateY(0) } 50%{ transform:translateY(-12px) } 100%{ transform:translateY(0) } }
+
+/* Strong, clashing table borders */
+table{ border-collapse:separate; border-spacing:6px; background:#fff }
+th,td{ border:6px solid #cc00cc; padding:16px }
+
+/* Accessibility respect */
+@media (prefers-reduced-motion: reduce){ .floaty{ animation:none } }
+
+/* End abomination.css */

@@ -1,4 +1,59 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <div>
+        {{ form_row(form.date) }}
+        {{ form_row(form.client) }}
+    </div>
+
+    <h3>Taillers</h3>
+    <div id="taillers-wrapper" data-prototype="{{ form_widget(form.taillers.vars.prototype)|e('html_attr') }}">
+        {% for tailler in form.taillers %}
+            <div class="tailler-item">
+                {{ form_row(tailler.hauteur) }}
+                {{ form_row(tailler.longueur) }}
+                {{ form_row(tailler.Haie) }}
+                <button type="button" class="remove-tailler">Supprimer</button>
+            </div>
+        {% endfor %}
+    </div>
+    <button type="button" id="add-tailler" class="btn">Ajouter Tailler</button>
+
+    <div style="margin-top:16px;">
+        <button class="btn">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('app_devis_index') }}">back to list</a>
+    </div>
+
 {{ form_end(form) }}
+
+{# JS to add/remove collection items #}
+<script>
+    (function(){
+        const wrapper = document.getElementById('taillers-wrapper');
+        if(!wrapper) return;
+
+        const addButton = document.getElementById('add-tailler');
+        let index = wrapper.querySelectorAll('.tailler-item').length;
+        const prototype = wrapper.dataset.prototype;
+
+        function addTailler() {
+            let newForm = prototype.replace(/__name__/g, index);
+            const container = document.createElement('div');
+            container.className = 'tailler-item';
+            container.innerHTML = newForm + '<button type="button" class="remove-tailler">Supprimer</button>';
+            wrapper.appendChild(container);
+            attachRemove(container.querySelector('.remove-tailler'));
+            index++;
+        }
+
+        function attachRemove(btn){
+            btn.addEventListener('click', function(){
+                btn.closest('.tailler-item').remove();
+            });
+        }
+
+        // attach to existing remove buttons
+        document.querySelectorAll('.remove-tailler').forEach(attachRemove);
+
+        addButton.addEventListener('click', addTailler);
+    })();
+</script>

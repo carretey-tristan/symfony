@@ -1,0 +1,79 @@
+/* UGLIEST.CSS - The absolute worst (non-strobing) visual assault
+   - Clashing fonts
+   - Oversized borders and offsets
+   - Diagonal checkerboard + noisy overlay
+   - Rotated headings, huge letter spacing
+   - Very high contrast and unpleasant spacing
+   Respects prefers-reduced-motion (no flashing/strobe).
+*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,700&family=Courier+Prime&family=Playball&display=swap');
+
+:root{ --acid:#bfff00; --vomit:#ff6f00; --toxic:#00ffd5; --black:#050505; --white:#fff8e6 }
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  font-family: 'Montserrat', 'Courier Prime', sans-serif;
+  background-color: var(--white);
+  color:var(--black);
+  background-image: repeating-conic-gradient(from 45deg at 20% 20%, #fff0 0 20deg, rgba(0,0,0,0.02) 20deg 40deg),
+                    linear-gradient(135deg, rgba(191,255,0,0.06), rgba(255,111,0,0.04));
+}
+
+/* Horrible checkerboard header stripe */
+header{ position:fixed; top:0; left:0; right:0; height:86px; z-index:999; display:flex; align-items:center; padding:10px 22px; background: repeating-linear-gradient(90deg,#fff 0 6px,#000 6px 12px); border-bottom:16px solid var(--vomit); }
+nav h3{ margin:0; font-family:'Playball', cursive; font-size:46px; color:var(--toxic); transform:rotate(-4deg); text-shadow: 6px 6px 0 #000 }
+
+/* Side nav forced into the body with bad spacing */
+nav ul{ list-style:none; margin:0 0 0 18px; padding:0; display:flex; gap:10px }
+nav a{ display:inline-block; padding:10px 14px; background:linear-gradient(180deg,var(--acid),var(--vomit)); color:#000; border:4px double var(--black); font-weight:900; text-decoration:none; transform:skewX(-8deg) }
+
+/* Main layout looks offset and broken */
+main{ margin-top:140px; padding:40px 64px; transform:skewY(-2deg); }
+.card{ max-width:1200px; margin:0 auto; padding:34px; background: linear-gradient(180deg,#fff,#fff8e0); border-left:22px solid var(--acid); border-right:22px solid var(--vomit); box-shadow: 0 28px 0 rgba(0,0,0,0.15) }
+
+/* Headings brutal */
+h1{ font-size:68px; margin:0 0 12px 0; letter-spacing:14px; color:var(--vomit); text-transform:uppercase; transform:rotate(-5deg); border-bottom:6px dotted var(--toxic) }
+h2{ font-size:36px; color:var(--acid); transform:rotate(3deg); margin:0 0 8px 0 }
+
+/* Paragraphs cramped and shouting */
+p{ margin:0 0 18px 0; line-height:1.02; font-weight:700; text-transform:uppercase; word-spacing:8px }
+
+/* Links painful */
+a{ color:var(--toxic); text-decoration: underline wavy var(--vomit); font-weight:900 }
+a:hover{ color:var(--acid); text-decoration-color:var(--toxic) }
+
+/* Buttons look like signs */
+.btn{ display:inline-block; padding:18px 26px; background: repeating-linear-gradient(45deg,#fff 0 8px,#000 8px 16px); color:var(--vomit); border:10px outset var(--toxic); font-weight:900; font-size:18px }
+
+/* Inputs - thick, mismatched */
+input,textarea,select{ display:block; width:100%; padding:12px; margin:8px 0 18px 0; border:8px groove var(--acid); background:linear-gradient(180deg,#fff,#fffad6); font-family:'Courier Prime', monospace; font-weight:700 }
+
+/* Tables: diagonally striped rows and huge cell padding */
+table{ width:100%; border-collapse:separate; border-spacing:14px; border:12px solid var(--vomit) }
+th,td{ padding:22px; background: linear-gradient(90deg,#fff8e6,#fff); border:6px solid #000 }
+tr:nth-child(odd) td{ transform:skewX(-3deg) }
+
+/* Decorative noisy overlay to amplify ugliness */
+body::before{ content:''; position:fixed; inset:0; pointer-events:none; background-image:
+  linear-gradient(45deg, rgba(0,0,0,0.015) 1px, transparent 1px),
+  repeating-linear-gradient(0deg, rgba(255,0,0,0.02), rgba(255,0,0,0.02) 2px, transparent 2px, transparent 8px);
+  mix-blend-mode: multiply; opacity:0.9; z-index:9997 }
+
+/* Big cursor and selection that hurt */
+*{ caret-color:var(--vomit) }
+::selection{ background:var(--acid); color:#000 }
+
+/* Slight bounce on headings to be annoying but not flashing */
+.annoy{ animation: annoyBounce 5s ease-in-out infinite }
+@keyframes annoyBounce{ 0%{ transform:translateY(0) } 50%{ transform:translateY(-8px) } 100%{ transform:translateY(0) } }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){ .annoy{ animation:none } body::before{ opacity:0.4 } }
+
+/* Utility: intentionally bad spacing helpers */
+.huge-gap{ margin-top:48px; margin-bottom:48px }
+.tight{ margin:0; padding:0 }
+
+/* End of ugliest.css */

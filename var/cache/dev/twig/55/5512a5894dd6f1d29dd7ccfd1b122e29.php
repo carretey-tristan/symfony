@@ -60,26 +60,37 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         ";
         // line 7
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 12
+        // line 22
         yield "
 
     </head>
     <body>
         <nav>
             <h3>Admin / CRUD</h3>
+            <div style=\"position:absolute; right:18px; top:12px;\">
+                <label for=\"theme-select\" style=\"font-size:13px; margin-right:6px; color:inherit\">Thème</label>
+                <select id=\"theme-select\" aria-label=\"Choisir un thème\">
+                    <option value=\"/css/gardener.css\">Gardener (floral)</option>
+                    <option value=\"/css/ugly.css\">Ugly (v1)</option>
+                    <option value=\"/css/uglyv2.css\">Ugly v2</option>
+                    <option value=\"/css/uglyv3.css\">Ugly v3</option>
+                    <option value=\"/css/abomination.css\">Abomination</option>
+                    <option value=\"/css/ugliest.css\">Ugliest</option>
+                </select>
+            </div>
             <ul>
                 <li><a href=\"";
-        // line 19
+        // line 40
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_accueil");
         yield "\">Accueil</a></li>
                 <li>Clients
                     <ul>
                         <li><a href=\"";
-        // line 22
+        // line 43
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_client_index");
         yield "\">Liste clients</a></li>
                         <li><a href=\"";
-        // line 23
+        // line 44
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_client_new");
         yield "\">Nouveau client</a></li>
                     </ul>
@@ -87,11 +98,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Devis
                     <ul>
                         <li><a href=\"";
-        // line 28
+        // line 49
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_devis_index");
         yield "\">Liste devis</a></li>
                         <li><a href=\"";
-        // line 29
+        // line 50
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_devis_new");
         yield "\">Nouveau devis</a></li>
                     </ul>
@@ -99,11 +110,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Haies
                     <ul>
                         <li><a href=\"";
-        // line 34
+        // line 55
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_creer_haie");
         yield "\">Créer une haie</a></li>
                         <li><a href=\"";
-        // line 35
+        // line 56
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voir_haie");
         yield "\">Gérer les haies</a></li>
                     </ul>
@@ -111,11 +122,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Catégories
                     <ul>
                         <li><a href=\"";
-        // line 40
+        // line 61
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_index");
         yield "\">Liste catégories</a></li>
                         <li><a href=\"";
-        // line 41
+        // line 62
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_new");
         yield "\">Nouvelle catégorie</a></li>
                     </ul>
@@ -123,11 +134,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Tailler
                     <ul>
                         <li><a href=\"";
-        // line 46
+        // line 67
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_tailler_index");
         yield "\">Liste tailles</a></li>
                         <li><a href=\"";
-        // line 47
+        // line 68
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_tailler_new");
         yield "\">Nouvelle taille</a></li>
                     </ul>
@@ -138,11 +149,35 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         <main>
             <div class=\"card\">
                 ";
-        // line 55
+        // line 76
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 57
+        // line 78
         yield "            </div>
         </main>
+        <script>
+            (function(){
+                const link = document.getElementById('theme-stylesheet');
+                const select = document.getElementById('theme-select');
+                if(!link || !select) return;
+
+                // Apply saved theme or default
+                const saved = localStorage.getItem('site-theme');
+                const defaultHref = link.getAttribute('href') || '/css/ugliest.css';
+                const hrefToUse = saved || defaultHref;
+                link.setAttribute('href', hrefToUse);
+
+                // Set select to match
+                for(const opt of select.options){
+                    if(opt.value === hrefToUse){ opt.selected = true; break; }
+                }
+
+                select.addEventListener('change', function(){
+                    const href = select.value;
+                    link.setAttribute('href', href);
+                    try{ localStorage.setItem('site-theme', href); }catch(e){}
+                });
+            })();
+        </script>
     </body>
 </html>
 ";
@@ -193,7 +228,17 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
 
         // line 8
         yield "            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-            <link rel=\"stylesheet\" href=\"/css/ugly.css\">
+            <link id=\"theme-stylesheet\" rel=\"stylesheet\" href=\"/css/ugliest.css\">
+            <style>
+                /* Keep nav in normal document flow (on top of the page, not fixed to the viewport) */
+                nav{ position:relative; top:0; left:0; right:0; z-index:50; }
+                /* Give a small top margin so the content doesn't sit flush under the nav */
+                main{ margin-top:24px; }
+                /* Put decorative page overlays behind nav and content */
+                body::before, body::after{ z-index:0; }
+                /* Make the theme selector clickable above overlays */
+                #theme-select{ position:relative; z-index:60; }
+            </style>
 
         ";
         
@@ -205,7 +250,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         yield from [];
     }
 
-    // line 55
+    // line 76
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -218,7 +263,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 56
+        // line 77
         yield "                ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -250,7 +295,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  222 => 56,  209 => 55,  195 => 8,  182 => 7,  159 => 5,  144 => 57,  142 => 55,  131 => 47,  127 => 46,  119 => 41,  115 => 40,  107 => 35,  103 => 34,  95 => 29,  91 => 28,  83 => 23,  79 => 22,  73 => 19,  64 => 12,  62 => 7,  57 => 5,  51 => 1,);
+        return array (  267 => 77,  254 => 76,  230 => 8,  217 => 7,  194 => 5,  155 => 78,  153 => 76,  142 => 68,  138 => 67,  130 => 62,  126 => 61,  118 => 56,  114 => 55,  106 => 50,  102 => 49,  94 => 44,  90 => 43,  84 => 40,  64 => 22,  62 => 7,  57 => 5,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -263,7 +308,17 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
         {% block stylesheets %}
             <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-            <link rel=\"stylesheet\" href=\"/css/ugly.css\">
+            <link id=\"theme-stylesheet\" rel=\"stylesheet\" href=\"/css/ugliest.css\">
+            <style>
+                /* Keep nav in normal document flow (on top of the page, not fixed to the viewport) */
+                nav{ position:relative; top:0; left:0; right:0; z-index:50; }
+                /* Give a small top margin so the content doesn't sit flush under the nav */
+                main{ margin-top:24px; }
+                /* Put decorative page overlays behind nav and content */
+                body::before, body::after{ z-index:0; }
+                /* Make the theme selector clickable above overlays */
+                #theme-select{ position:relative; z-index:60; }
+            </style>
 
         {% endblock %}
 
@@ -272,6 +327,17 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
     <body>
         <nav>
             <h3>Admin / CRUD</h3>
+            <div style=\"position:absolute; right:18px; top:12px;\">
+                <label for=\"theme-select\" style=\"font-size:13px; margin-right:6px; color:inherit\">Thème</label>
+                <select id=\"theme-select\" aria-label=\"Choisir un thème\">
+                    <option value=\"/css/gardener.css\">Gardener (floral)</option>
+                    <option value=\"/css/ugly.css\">Ugly (v1)</option>
+                    <option value=\"/css/uglyv2.css\">Ugly v2</option>
+                    <option value=\"/css/uglyv3.css\">Ugly v3</option>
+                    <option value=\"/css/abomination.css\">Abomination</option>
+                    <option value=\"/css/ugliest.css\">Ugliest</option>
+                </select>
+            </div>
             <ul>
                 <li><a href=\"{{ path('app_accueil') }}\">Accueil</a></li>
                 <li>Clients
@@ -313,6 +379,30 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 {% endblock %}
             </div>
         </main>
+        <script>
+            (function(){
+                const link = document.getElementById('theme-stylesheet');
+                const select = document.getElementById('theme-select');
+                if(!link || !select) return;
+
+                // Apply saved theme or default
+                const saved = localStorage.getItem('site-theme');
+                const defaultHref = link.getAttribute('href') || '/css/ugliest.css';
+                const hrefToUse = saved || defaultHref;
+                link.setAttribute('href', hrefToUse);
+
+                // Set select to match
+                for(const opt of select.options){
+                    if(opt.value === hrefToUse){ opt.selected = true; break; }
+                }
+
+                select.addEventListener('change', function(){
+                    const href = select.value;
+                    link.setAttribute('href', href);
+                    try{ localStorage.setItem('site-theme', href); }catch(e){}
+                });
+            })();
+        </script>
     </body>
 </html>
 ", "base.html.twig", "C:\\Random\\Github\\symfony\\templates\\base.html.twig");
