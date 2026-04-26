@@ -87,10 +87,6 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                     <ul>
                         <li><a href=\"";
         // line 43
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_client_index");
-        yield "\">Liste clients</a></li>
-                        <li><a href=\"";
-        // line 44
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_client_new");
         yield "\">Nouveau client</a></li>
                     </ul>
@@ -98,11 +94,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Devis
                     <ul>
                         <li><a href=\"";
-        // line 49
+        // line 48
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_devis_index");
         yield "\">Liste devis</a></li>
                         <li><a href=\"";
-        // line 50
+        // line 49
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_devis_new");
         yield "\">Nouveau devis</a></li>
                     </ul>
@@ -110,11 +106,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Haies
                     <ul>
                         <li><a href=\"";
-        // line 55
+        // line 54
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_creer_haie");
         yield "\">Créer une haie</a></li>
                         <li><a href=\"";
-        // line 56
+        // line 55
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voir_haie");
         yield "\">Gérer les haies</a></li>
                     </ul>
@@ -122,11 +118,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Catégories
                     <ul>
                         <li><a href=\"";
-        // line 61
+        // line 60
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_index");
         yield "\">Liste catégories</a></li>
                         <li><a href=\"";
-        // line 62
+        // line 61
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_new");
         yield "\">Nouvelle catégorie</a></li>
                     </ul>
@@ -134,11 +130,11 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li>Tailler
                     <ul>
                         <li><a href=\"";
-        // line 67
+        // line 66
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_tailler_index");
         yield "\">Liste tailles</a></li>
                         <li><a href=\"";
-        // line 68
+        // line 67
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_tailler_new");
         yield "\">Nouvelle taille</a></li>
                     </ul>
@@ -149,9 +145,9 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         <main>
             <div class=\"card\">
                 ";
-        // line 76
+        // line 75
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 78
+        // line 77
         yield "            </div>
         </main>
         <script>
@@ -250,7 +246,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         yield from [];
     }
 
-    // line 76
+    // line 75
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -263,7 +259,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 77
+        // line 76
         yield "                ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -295,7 +291,7 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  267 => 77,  254 => 76,  230 => 8,  217 => 7,  194 => 5,  155 => 78,  153 => 76,  142 => 68,  138 => 67,  130 => 62,  126 => 61,  118 => 56,  114 => 55,  106 => 50,  102 => 49,  94 => 44,  90 => 43,  84 => 40,  64 => 22,  62 => 7,  57 => 5,  51 => 1,);
+        return array (  263 => 76,  250 => 75,  226 => 8,  213 => 7,  190 => 5,  151 => 77,  149 => 75,  138 => 67,  134 => 66,  126 => 61,  122 => 60,  114 => 55,  110 => 54,  102 => 49,  98 => 48,  90 => 43,  84 => 40,  64 => 22,  62 => 7,  57 => 5,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -342,7 +338,6 @@ class __TwigTemplate_5b3baef0749173f387c34d3ddfa1062f extends Template
                 <li><a href=\"{{ path('app_accueil') }}\">Accueil</a></li>
                 <li>Clients
                     <ul>
-                        <li><a href=\"{{ path('app_client_index') }}\">Liste clients</a></li>
                         <li><a href=\"{{ path('app_client_new') }}\">Nouveau client</a></li>
                     </ul>
                 </li>
